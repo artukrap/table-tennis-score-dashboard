@@ -26,13 +26,13 @@ defmodule TableTennisWeb.ConnCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(TableTennis.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(TableTennis.Repo, {:shared, self()})
     end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
-
 end
