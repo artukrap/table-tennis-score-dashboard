@@ -2,6 +2,6 @@ defmodule TableTennisWeb.PageController do
   use TableTennisWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    json(conn, %{status: 1})
   end
 end

@@ -35,8 +35,7 @@ config :table_tennis, TableTennisWeb.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/table_tennis_web/views/.*(ex)$},
-      ~r{lib/table_tennis_web/templates/.*(eex)$}
+      ~r{lib/table_tennis_web/views/.*(ex)$}
     ]
   ]
 
@@ -47,11 +46,4 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
-# Configure your database
-config :table_tennis, TableTennis.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "table_tennis_dev",
-  hostname: "localhost",
-  pool_size: 10
+import_config "dev.secret.exs"
