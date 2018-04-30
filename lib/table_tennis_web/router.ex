@@ -9,5 +9,6 @@ defmodule TableTennisWeb.Router do
     pipe_through(:api)
 
     resources("/players", PlayerController, only: [:index, :create])
+    resources("/games", GameController, only: [:create])
   end
 end

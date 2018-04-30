@@ -3,6 +3,14 @@ defmodule TableTennis.GamesTest do
 
   alias TableTennis.Games
 
+  describe "games" do
+    alias TableTennis.Games.Game
+
+    test "create_game/0 creates a game" do
+      assert {:ok, %Game{} = _game} = Games.create_game()
+    end
+  end
+
   describe "players" do
     alias TableTennis.Games.Player
 
