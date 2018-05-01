@@ -39,4 +39,19 @@ defmodule TableTennis.AccountsTest do
       assert Accounts.get_players([player_1.id, player_2.id]) == [player_1, player_2]
     end
   end
+
+  describe "player_statistics" do
+    alias TableTennis.Accounts.PlayerStatistic
+
+    test "init_player_statistics/1 retuns player statistic" do
+      player = player_fixture()
+
+      assert {:ok, %PlayerStatistic{} = player_statistic} =
+               Accounts.init_player_statistics(player)
+
+      assert player_statistic.player_id == player.id
+      assert player_statistic.total_wins == 0
+      assert player_statistic.total_losses == 0
+    end
+  end
 end

@@ -5,8 +5,8 @@ defmodule TableTennis.Accounts.PlayerStatistic do
   alias TableTennis.Accounts.Player
 
   schema "player_statistics" do
-    field(:total_wins, :integer)
-    field(:total_losses, :integer)
+    field(:total_wins, :integer, default: 0)
+    field(:total_losses, :integer, default: 0)
 
     belongs_to(:player, Player)
 
@@ -16,6 +16,6 @@ defmodule TableTennis.Accounts.PlayerStatistic do
   def changeset(player_statistic, attrs) do
     player_statistic
     |> cast(attrs, [:player_id, :total_wins, :total_losses])
-    |> validate_required([:player_id, :total_wins, :total_losses])
+    |> validate_required([:player_id])
   end
 end
