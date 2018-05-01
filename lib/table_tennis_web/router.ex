@@ -11,7 +11,7 @@ defmodule TableTennisWeb.Router do
     resources("/players", PlayerController, only: [:index, :create])
 
     resources("/games", GameController, only: [:create]) do
-      resources("/players", GamePlayerController, only: [:create])
+      resources("/players", GamePlayerController, only: [:create, :update])
     end
   end
 end
