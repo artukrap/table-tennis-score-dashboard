@@ -1,4 +1,4 @@
-defmodule TableTennis.Games.Player do
+defmodule TableTennis.Accounts.Player do
   use Ecto.Schema
   import Ecto.Changeset
 

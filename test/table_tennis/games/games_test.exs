@@ -16,45 +16,18 @@ defmodule TableTennis.GamesTest do
     end
   end
 
-  describe "players" do
-    alias TableTennis.Games.Player
-
-    @valid_attrs %{name: "some name"}
-    @invalid_attrs %{name: nil}
+  describe "game players" do
+    alias TableTennisWeb.{PlayerView, GameView}
+    alias TableTennis.Accounts
 
     def player_fixture(attrs \\ %{}) do
       {:ok, player} =
         attrs
-        |> Enum.into(@valid_attrs)
-        |> Games.create_player()
+        |> Enum.into(%{name: "some name"})
+        |> Accounts.create_player()
 
       player
     end
-
-    test "list_players/0 returns all players" do
-      player = player_fixture()
-      assert Games.list_players() == [player]
-    end
-
-    test "create_player/1 with valid data creates a player" do
-      assert {:ok, %Player{} = player} = Games.create_player(@valid_attrs)
-      assert player.name == "some name"
-    end
-
-    test "create_player/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Games.create_player(@invalid_attrs)
-    end
-
-    test "get_players/1 return players by ids" do
-      player_1 = player_fixture()
-      player_2 = player_fixture()
-
-      assert Games.get_players([player_1.id, player_2.id]) == [player_1, player_2]
-    end
-  end
-
-  describe "game players" do
-    alias TableTennisWeb.{PlayerView, GameView}
 
     test "add_players_to_game/2 creates game with two players" do
       {:ok, %Game{} = game} = Games.create_game()

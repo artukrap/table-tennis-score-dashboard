@@ -1,7 +1,8 @@
 defmodule TableTennis.Games.GamePlayer do
   use Ecto.Schema
   import Ecto.Changeset
-  alias TableTennis.Games.{Game, Player}
+  alias TableTennis.Games.Game
+  alias TableTennis.Accounts.Player
 
   schema "game_players" do
     field(:won, :integer)
