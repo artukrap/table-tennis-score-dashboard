@@ -13,4 +13,11 @@ defmodule TableTennisWeb.GameController do
       |> render("show.json", game: game)
     end
   end
+
+  def update(conn, %{"id" => game_id, "game_params" => game_params}) do
+    with game <- Games.get_game!(game_id),
+         :ok <- Games.update_game(game, game_params) do
+      json(conn, %{status: 1})
+    end
+  end
 end

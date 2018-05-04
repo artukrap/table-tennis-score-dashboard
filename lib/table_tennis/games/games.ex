@@ -3,6 +3,7 @@ defmodule TableTennis.Games do
 
   alias TableTennis.Repo
   alias TableTennis.Games.{Game, GamePlayer}
+  alias TableTennis.Accounts
   alias TableTennisWeb.{PlayerView, GameView}
 
   # Games
@@ -15,6 +16,19 @@ defmodule TableTennis.Games do
     %Game{}
     |> Game.changeset(%{})
     |> Repo.insert()
+  end
+
+  def update_game(%Game{} = game, %{"won" => player_id_1, "lost" => player_id_2}) do
+    GamePlayer
+    |> where(game_id: ^game.id)
+    |> where(player_id: ^player_id_1)
+    |> Repo.one()
+    |> __MODULE__.update_game_player(%{"won" => 1})
+
+    Accounts.add_win(player_id_1)
+    Accounts.add_loss(player_id_2)
+
+    :ok
   end
 
   # Game players

@@ -14,6 +14,17 @@ defmodule TableTennis.GamesTest do
 
       assert game == Games.get_game!(game.id)
     end
+
+    test "update_game/2 returns :ok" do
+      {:ok, %Game{} = game} = Games.create_game()
+      player_1 = player_fixture()
+      player_2 = player_fixture()
+      Games.add_players_to_game!(game, [player_1, player_2])
+
+      response = Games.update_game(game, %{"won" => player_2.id, "lost" => player_1.id})
+
+      assert response == :ok
+    end
   end
 
   describe "game players" do
@@ -25,6 +36,8 @@ defmodule TableTennis.GamesTest do
         attrs
         |> Enum.into(%{name: "some name"})
         |> Accounts.create_player()
+
+      Accounts.init_player_statistics(player)
 
       player
     end

@@ -53,5 +53,31 @@ defmodule TableTennis.AccountsTest do
       assert player_statistic.total_wins == 0
       assert player_statistic.total_losses == 0
     end
+
+    test "get_player_statistics/1 returns player statistic" do
+      player = player_fixture()
+      Accounts.init_player_statistics(player)
+
+      assert player_statistic = Accounts.get_player_statistics!(player.id)
+      assert player_statistic.player_id == player.id
+      assert player_statistic.total_wins == 0
+      assert player_statistic.total_losses == 0
+    end
+
+    test "add_win/1 returns player statistic with added win" do
+      player = player_fixture()
+      Accounts.init_player_statistics(player)
+
+      assert {:ok, %PlayerStatistic{} = player_statistic} = Accounts.add_win(player.id)
+      assert player_statistic.total_wins == 1
+    end
+
+    test "add_loss/1 returns player statistic with added loss" do
+      player = player_fixture()
+      Accounts.init_player_statistics(player)
+
+      assert {:ok, %PlayerStatistic{} = player_statistic} = Accounts.add_loss(player.id)
+      assert player_statistic.total_losses == 1
+    end
   end
 end
